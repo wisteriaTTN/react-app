@@ -1,0 +1,40 @@
+$common-color: #00A743;
+
+.article {
+  text-align: left;
+
+  &-block {
+    margin: 0 auto;
+    width: 1000px;
+    background: $common-color;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  &-title {
+    color: #ffffff;
+  }
+  &-description {
+    color: #d8d8d8;
+    font-style: italic;
+    line-height: 2;
+  }
+  &-body {
+    color: #332a2a;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+}
+
+.comments {
+  &-block{
+    margin: 0 auto;
+    width: 1000px;
+  }
+  &-item {
+    border-bottom: 1px solid $common-color;
+    padding: 10px;
+  }
+  &-date {
+    color: #9199a1;
+  }
+}
