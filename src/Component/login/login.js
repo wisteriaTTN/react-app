@@ -46,6 +46,9 @@ class Login extends Component {
     .then(data => {
       if (data) {
         localStorage.setItem('token', JSON.stringify(data.user.token));
+        localStorage.setItem('currentUser', data.user);
+        localStorage.setItem('imageUser', data.user.image);
+        localStorage.setItem('username', data.user.username);
         this.props.history.push('/home');
       }
     })

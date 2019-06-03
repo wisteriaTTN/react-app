@@ -1,5 +1,20 @@
 $common-color: #1f984f;
+$comment-color: #23522f;
 
+.text-align-center {
+  text-align: center;
+}
+
+.col {
+  &-1 {
+    width: 8.33%;
+    display: inline-block;
+  }
+  &-11 {
+    width: 91.67%;
+    display: inline-block;
+  }
+}
 .article {
     text-align: left;
 
@@ -9,6 +24,7 @@ $common-color: #1f984f;
         background: $common-color;
         border-radius: 10px;
         padding: 15px;
+        margin-top: 4%;
     }
 
     &-title {
@@ -32,14 +48,46 @@ $common-color: #1f984f;
     &-block {
         margin: 0 auto;
         width: 1000px;
+        margin-bottom: 4%;
     }
 
     &-item {
         border-bottom: 1px solid $common-color;
         padding: 10px;
+        background: #eafff0;
+        border-radius: 5px;
+        margin-top: 1em;
+    }
+
+    &-image {
+      height: 30px;
+      width: 30px;
+      border: 1px solid $comment-color;
+      margin: 0 auto;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &-body {
+      vertical-align: top;
+      input {
+        width: 90%;
+        height: 30px;
+        border: 1px solid $comment-color;
+        border-radius: 6px;
+        padding: 5px; 
+      }
+    }
+
+    &-title {
+        color: $comment-color;
     }
 
     &-date {
-        color: #9199a1;
+        color: #8e3d04;
     }
+
 }
