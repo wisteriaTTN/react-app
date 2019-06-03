@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './login.scss';
 import { URL } from '../../Common/constant';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props){
@@ -13,6 +14,11 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    if(localStorage.getItem("token")) {
+      this.props.history.push('/home');
+    }
+  }
 
   handleChange(event) {
     const name = event.target.name;
@@ -23,6 +29,7 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const user = {"user": { email: this.state.email, password: this.state.password }};
 
     const requestOptions = {
@@ -30,8 +37,7 @@ class Login extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user)
     };
-    console.log(requestOptions);
-    event.preventDefault();
+    
     fetch(`${URL}/users/login`, requestOptions)
     .then(res => {
       if(!res.ok) throw new Error(res.status);
@@ -40,7 +46,7 @@ class Login extends Component {
     .then(data => {
       if (data) {
         localStorage.setItem('token', JSON.stringify(data.user.token));
-        
+        this.props.history.push('/home');
       }
     })
     .catch((error) => {
@@ -69,4 +75,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
