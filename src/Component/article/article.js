@@ -59,19 +59,23 @@ class Article extends Component {
     });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     var slug = this.props.match.params.slug;
     const comment = {"comment": {"body": this.state.newComment}}
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.getItem("token")}`
+      },
       body: JSON.stringify(comment)
     };
 
     fetch(`${URL}/articles/${slug}/comments`, requestOptions)
     .then(res => res.json())
-    .then(comments => {
-        console.log(comments);
+    .then(comment => {
+      
     });
   }
 
