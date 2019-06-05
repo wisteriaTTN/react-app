@@ -23,14 +23,18 @@ function CommentList({ comments }) {
 }
 
 class Article extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       article: {},
-      comments: {}
+      comments: {},
+      newComment: ""
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  
   componentDidMount() {
     if(localStorage.getItem("token")){
       var slug = this.props.match.params.slug;
@@ -47,6 +51,28 @@ class Article extends Component {
     else {
       this.props.history.push("/");
     }
+  }
+
+  handleChange(event) {
+    this.setState({
+      newComment: event.target.value
+    });
+  }
+
+  handleSubmit() {
+    var slug = this.props.match.params.slug;
+    const comment = {"comment": {"body": this.state.newComment}}
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(comment)
+    };
+
+    fetch(`${URL}/articles/${slug}/comments`, requestOptions)
+    .then(res => res.json())
+    .then(comments => {
+        console.log(comments);
+    });
   }
 
   render() {
@@ -68,8 +94,10 @@ class Article extends Component {
               </div>
               <Link to={`/user`}>{localStorage.getItem("username")}</Link>
             </div>
-            <div className="col-11 comments-body">
-              <input type="text" placeholder="What do you want to say?"/>
+            <div className="col-11 comments-body" onSubmit={this.handleSubmit}>
+              <form onSubmit= { this.props.onSubmit}>
+                <input type="text" placeholder="What do you want to say?" value={this.state.newComment} onChange={this.handleChange}/>
+              </form>
             </div>
           </div>
         </div>
