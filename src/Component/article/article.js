@@ -79,17 +79,12 @@ class Article extends Component {
     fetch(`${URL}/articles/${slug}/comments`, requestOptions)
     .then(res => res.json())
     .then(comment => {
-      var newCmt = comment.comment;
-      
-      console.log(newCmt);
-      this.setState(prev => {
-        const Cmts = Object.assign(prev.comments, comment.comment);
-  
-        return {
-          comments: Cmts,
-          newComment: '',
-        };
-      }
+        this.setState(prev => {
+          return {
+            comments: [...prev.comments, comment.comment],
+            newComment: ""
+          }
+        }
       );
       console.log(JSON.stringify(this.state.comments));
     });
