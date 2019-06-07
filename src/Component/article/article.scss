@@ -10,8 +10,8 @@ $comment-color: #23522f;
     width: 8.33%;
     display: inline-block;
   }
-  &-11 {
-    width: 91.67%;
+  &-10 {
+    width: 83.34%;
     display: inline-block;
   }
 }
@@ -57,6 +57,7 @@ $comment-color: #23522f;
         background: #eafff0;
         border-radius: 5px;
         margin-top: 1em;
+        display: flex;
     }
 
     &-image {
@@ -72,10 +73,9 @@ $comment-color: #23522f;
     }
 
     &-body {
-      vertical-align: top;
       input {
-        width: 90%;
-        height: 30px;
+        width: 95%;
+        height: 36px;
         border: 1px solid $comment-color;
         border-radius: 6px;
         padding: 5px; 
@@ -89,5 +89,33 @@ $comment-color: #23522f;
     &-date {
         color: #8e3d04;
     }
+}
 
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+  :focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+
+  &-danger {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: #ffffff;
+  }
 }

@@ -14,9 +14,12 @@ function CommentList({ comments }) {
           </div>
           <Link to={`/profiles/${item.author.username}`}>{item.author.username}</Link>
         </div>
-        <div className="col-11 comments-body">
+        <div className="col-10 comments-body">
           <div>{item.body}</div>
           <div className="comments-date">{formatDate(item.createdAt)}</div>
+        </div>
+        <div className="col-1">
+          {item.author.username === localStorage.getItem("username") && <button type="button" className="btn btn-danger" onClick={this.onClick}>Delete</button>}
         </div>
       </div>
     ));
@@ -25,6 +28,7 @@ function CommentList({ comments }) {
     return <div></div>
   }
 };
+
 
 class Article extends Component {
 
@@ -37,6 +41,7 @@ class Article extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   
   componentDidMount() {
@@ -55,6 +60,10 @@ class Article extends Component {
     else {
       this.props.history.push("/");
     }
+  }
+
+  handleClick(event){
+      console.log(event.target.value);
   }
 
   handleChange(event) {
@@ -108,7 +117,7 @@ class Article extends Component {
               </div>
               <Link to={`/user`}>{localStorage.getItem("username")}</Link>
             </div>
-            <div className="col-11 comments-body" onSubmit={this.handleSubmit}>
+            <div className="col-10 comments-body" onSubmit={this.handleSubmit}>
               <form onSubmit= { this.props.onSubmit}>
                 <input type="text" placeholder="What do you want to say?" value={this.state.newComment} onChange={this.handleChange}/>
               </form>
