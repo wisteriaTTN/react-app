@@ -2,25 +2,29 @@ import React, { Component } from 'react';
 import { URL } from '../../Common/constant';
 import { Link, withRouter } from "react-router-dom";
 import './article.scss';
-import { formatDate } from '../../Common/format-date'
+import { formatDate, isEmpty } from '../../Common/format-date'
 
 function CommentList({ comments }) {
-  console.log(comments);
-  return comments.map((item) => 
-  <div className="comments-item" key={item.id}>
-    <div className="col-1 text-align-center">
-      <div className="comments-image">
-        <img alt="" src={item.author.image}/>
+  if(!isEmpty(comments)){
+    return comments.map((item) => (
+      <div className="comments-item" key={item.id}>
+        <div className="col-1 text-align-center">
+          <div className="comments-image">
+            <img alt="" src={item.author.image}/>
+          </div>
+          <Link to={`/profiles/${item.author.username}`}>{item.author.username}</Link>
+        </div>
+        <div className="col-11 comments-body">
+          <div>{item.body}</div>
+          <div className="comments-date">{formatDate(item.createdAt)}</div>
+        </div>
       </div>
-      <Link to={`/profiles/${item.author.username}`}>{item.author.username}</Link>
-    </div>
-    <div className="col-11 comments-body">
-      <div>{item.body}</div>
-      <div className="comments-date">{formatDate(item.createdAt)}</div>
-    </div>
-  </div>
-  );
-}
+    ));
+  }
+  else {
+    return <div></div>
+  }
+};
 
 class Article extends Component {
 
@@ -45,7 +49,7 @@ class Article extends Component {
       .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
       .then(([data1, data2]) => this.setState({
         article: data1.article,
-        comments: data2
+        comments: data2.comments
       }));
     }
     else {
@@ -75,7 +79,19 @@ class Article extends Component {
     fetch(`${URL}/articles/${slug}/comments`, requestOptions)
     .then(res => res.json())
     .then(comment => {
+      var newCmt = comment.comment;
       
+      console.log(newCmt);
+      this.setState(prev => {
+        const Cmts = Object.assign(prev.comments, comment.comment);
+  
+        return {
+          comments: Cmts,
+          newComment: '',
+        };
+      }
+      );
+      console.log(JSON.stringify(this.state.comments));
     });
   }
 
@@ -89,8 +105,7 @@ class Article extends Component {
         </div>
         <div className="comments-block">
           <h2 className="comments-title">Comments</h2>
-          {this.state.comments && this.state.comments.comments &&
-            <CommentList comments={this.state.comments.comments} />}
+          <CommentList comments={this.state.comments} />
           <div className="comments-item">
             <div className="col-1 text-align-center">
               <div className="comments-image">
