@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { URL } from '../../Common/constant';
 import { Link, withRouter } from "react-router-dom";
 import './article.scss';
-import { formatDate, isEmpty } from '../../Common/format-date'
+import { formatDate, isEmpty, callAPI } from '../../Common/common-ui'
 
-function CommentList({ comments }) {
+function CommentList({ comments, deleteComment }) {
   if(!isEmpty(comments)){
     return comments.map((item) => (
       <div className="comments-item" key={item.id}>
@@ -19,7 +19,7 @@ function CommentList({ comments }) {
           <div className="comments-date">{formatDate(item.createdAt)}</div>
         </div>
         <div className="col-1">
-          {item.author.username === localStorage.getItem("username") && <button type="button" className="btn btn-danger" onClick={this.onClick}>Delete</button>}
+          {item.author.username === localStorage.getItem("username") && <button type="button" className="btn btn-danger" onClick={() => deleteComment(item.id)}>Delete</button>}
         </div>
       </div>
     ));
@@ -29,9 +29,9 @@ function CommentList({ comments }) {
   }
 };
 
-
+var slug = "";
 class Article extends Component {
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -41,12 +41,12 @@ class Article extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+    slug = this.props.match.params.slug;
   }
   
   componentDidMount() {
     if(localStorage.getItem("token")){
-      var slug = this.props.match.params.slug;
       Promise.all([
         fetch(URL + `/articles/${slug}`),
         fetch(URL + `/articles/${slug}/comments`)
@@ -62,8 +62,21 @@ class Article extends Component {
     }
   }
 
-  handleClick(event){
-      console.log(event.target.value);
+  deleteComment(id){
+    callAPI('DELETE', null, `${URL}/articles/${slug}/comments/${id}`)
+    .then( res => {
+      if(res !== 200){
+        console.log(res);
+      }
+      else{
+        callAPI('GET', null, `${URL}/articles/${slug}/comments`)
+        .then( data => {
+          this.setState({
+            comments: data.comments
+          })
+        })
+      } 
+    });
   }
 
   handleChange(event) {
@@ -74,30 +87,19 @@ class Article extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    var slug = this.props.match.params.slug;
-    const comment = {"comment": {"body": this.state.newComment}}
-    const requestOptions = {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem("token")}`
-      },
-      body: JSON.stringify(comment)
-    };
-
-    fetch(`${URL}/articles/${slug}/comments`, requestOptions)
-    .then(res => res.json())
-    .then(comment => {
+    const comment = {"comment": {"body": this.state.newComment}};
+    callAPI('POST', comment, `${URL}/articles/${slug}/comments`)
+      .then( comment => {
         this.setState(prev => {
           return {
             comments: [...prev.comments, comment.comment],
             newComment: ""
           }
-        }
-      );
-      console.log(JSON.stringify(this.state.comments));
-    });
-  }
+        });
+        console.log(JSON.stringify(this.state.comments));
+      });
+    }
+    
 
   render() {
     return (
@@ -109,7 +111,7 @@ class Article extends Component {
         </div>
         <div className="comments-block">
           <h2 className="comments-title">Comments</h2>
-          <CommentList comments={this.state.comments} />
+          <CommentList comments={this.state.comments} deleteComment={this.deleteComment} />
           <div className="comments-item">
             <div className="col-1 text-align-center">
               <div className="comments-image">

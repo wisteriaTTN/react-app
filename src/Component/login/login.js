@@ -55,7 +55,7 @@ class Login extends Component {
     .catch((error) => {
       console.log(error);
       this.setState({ message: "Wrong email or password" });
-    });;
+    });
   
   }
 
