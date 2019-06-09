@@ -1,34 +1,21 @@
-$common-color: #1f984f;
-$comment-color: #23522f;
-
 .text-align-center {
   text-align: center;
 }
 
-.col {
-  &-1 {
-    width: 8.33%;
-    display: inline-block;
-  }
-  &-10 {
-    width: 83.34%;
-    display: inline-block;
-  }
-}
 .article {
     text-align: left;
 
     &-block {
         margin: 0 auto;
         width: 1000px;
-        background: $common-color;
+        background: $green-100;
         border-radius: 10px;
         padding: 15px;
         margin-top: 4%;
     }
 
     &-title {
-        color: #ffffff;
+        color: $white;
     }
 
     &-description {
@@ -52,7 +39,7 @@ $comment-color: #23522f;
     }
 
     &-item {
-        border-bottom: 1px solid $common-color;
+        border-bottom: 1px solid $green-100;
         padding: 10px;
         background: #eafff0;
         border-radius: 5px;
@@ -63,7 +50,7 @@ $comment-color: #23522f;
     &-image {
       height: 30px;
       width: 30px;
-      border: 1px solid $comment-color;
+      border: 1px solid $green-200;
       margin: 0 auto;
 
       img {
@@ -76,46 +63,17 @@ $comment-color: #23522f;
       input {
         width: 95%;
         height: 36px;
-        border: 1px solid $comment-color;
+        border: 1px solid $green-200;
         border-radius: 6px;
         padding: 5px; 
       }
     }
 
     &-title {
-        color: $comment-color;
+        color: $green-200;
     }
 
     &-date {
         color: #8e3d04;
     }
-}
-
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-  :focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-  }
-
-  &-danger {
-    background: #dc3545;
-    border-color: #dc3545;
-    color: #ffffff;
-  }
 }

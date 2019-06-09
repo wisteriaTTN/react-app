@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { URL } from '../../Common/constant';
 import { Link, withRouter } from "react-router-dom";
-import './article.scss';
+import '../../App.scss';
 import { formatDate, isEmpty, callAPI } from '../../Common/common-ui'
 
 function CommentList({ comments, deleteComment }) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './login.scss';
+import '../../App.scss';
 import { URL } from '../../Common/constant';
 import { withRouter } from 'react-router-dom';
 

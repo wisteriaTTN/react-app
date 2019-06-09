@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { URL } from '../../Common/constant';
 import { Link, withRouter } from "react-router-dom";
-import './home.scss';
+import '../../App.scss';
 import { formatDate } from '../../Common/common-ui'
 
 function ArticleList({ articles }) {

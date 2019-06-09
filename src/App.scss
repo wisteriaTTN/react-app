@@ -1,34 +1,80 @@
+$white : #ffffff;
+$danger: #dc3545;
+$green-100: #1f984f;
+$green-200: #23522f;
+$blue : #007bff;
 .App {
-  text-align: center;
-  font-size: 14px;
+    text-align: center;
+    font-size: 14px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.col {
+    &-1 {
+        width: 8.33%;
+        display: inline-block;
+    }
+
+    &-10 {
+        width: 83.34%;
+        display: inline-block;
+    }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    :focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    }
+
+    &-danger {
+        background: $danger;
+        border-color: $danger;
+        color: $white;
+    }
 }
 
-.App-link {
-  color: #61dafb;
+nav {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+
+        li {
+            float: left;
+
+            a {
+                display: block;
+                color: $white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: #111;
+                }
+            }
+        }
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@import '../src/Component/login/login';
+@import '../src/Component/home/home';
+@import '../src/Component/article/article';
