@@ -11,10 +11,21 @@ function App() {
       <div className="App">
         <nav>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#about">About</a></li>
+            <li>
+              <div className="nav-dropdown">
+                <span> 
+                  <i className="fa fa-cog fa-lg"></i>
+                </span>
+                <div className="nav-dropdown-content">
+                  <a href="#link1">Link 1</a>
+                  <a href="#link2">Link 2</a>
+                  <a href="#link3">Link 3</a>
+                </div>
+              </div> 
+            </li>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#news">NEWS</a></li>
+            <li><a href="#contact">CONTACTS</a></li>
           </ul>
         </nav>
         <Route exact path="/" component={ Login }></Route>

@@ -1,7 +1,9 @@
 $white : #ffffff;
 $danger: #dc3545;
+$green-50: #27ae60;
 $green-100: #1f984f;
 $green-200: #23522f;
+$dark-100: #333;
 $blue : #007bff;
 .App {
     text-align: center;
@@ -55,26 +57,61 @@ nav {
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color: #333;
+        background-color: $dark-100;
 
         li {
-            float: left;
-
-            a {
+            float: right;
+            transition-duration: 0.5s;
+            &:hover,
+            &:focus-within {
+              background: $green-50;
+              cursor: pointer;
+            }
+            a, .nav-dropdown {
                 display: block;
                 color: $white;
                 text-align: center;
-                padding: 14px 16px;
+                font-weight: bold;
+                padding: 1em;
                 text-decoration: none;
 
                 &:hover {
-                    background-color: #111;
+                    background-color: darken($green-50, 10%);
+                    //border-bottom: 2px solid $white;
                 }
             }
         }
     }
 }
 
+.nav-dropdown {
+  float: left;
+  overflow: hidden;
+  &:hover .nav-dropdown-content {
+    display: block;
+    transition-duration: 0.5s;
+
+  }
+  &-content{
+    display: none;
+    right: 0;
+    top: 47px;
+    position: absolute;
+    background-color: darken($green-50, 10%);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)rgba(0,0,0,0.2);
+    z-index: 1;
+
+    a {
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      font-weight: 400;
+      &:hover{
+        background-color: $green-50;
+        font-weight: bold;
+      }
+    }
+  }
+}
 @import '../src/Component/login/login';
 @import '../src/Component/home/home';
 @import '../src/Component/article/article';
