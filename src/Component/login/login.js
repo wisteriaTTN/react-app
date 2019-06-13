@@ -54,7 +54,12 @@ class Login extends Component {
     })
     .catch((error) => {
       console.log(error);
-      this.setState({ message: "Wrong email or password" });
+      if(error.message === '422'){
+        this.setState({ message: "Wrong email or password" });
+      }
+      else {
+        this.setState({ message: "Please check your network" });
+      }
     });
   
   }
