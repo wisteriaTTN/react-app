@@ -19,7 +19,7 @@ function CommentList({ comments, deleteComment }) {
           <div className="comments-date">{formatDate(item.createdAt)}</div>
         </div>
         <div className="col-1">
-          {item.author.username === localStorage.getItem("username") && <button type="button" className="btn btn-danger" onClick={() => deleteComment(item.id)}>Delete</button>}
+          {item.author.username === localStorage.getItem('username') && <button type="button" className="btn btn-danger" onClick={() => deleteComment(item.id)}>Delete</button>}
         </div>
       </div>
     ));
@@ -29,7 +29,7 @@ function CommentList({ comments, deleteComment }) {
   }
 };
 
-var slug = "";
+var slug = '';
 class Article extends Component {
   
   constructor(props) {
@@ -37,7 +37,7 @@ class Article extends Component {
     this.state = {
       article: {},
       comments: {},
-      newComment: ""
+      newComment: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +46,7 @@ class Article extends Component {
   }
   
   componentDidMount() {
-    if(localStorage.getItem("token")){
+    if(localStorage.getItem('token')){
       Promise.all([
         fetch(URL + `/articles/${slug}`),
         fetch(URL + `/articles/${slug}/comments`)
@@ -58,7 +58,7 @@ class Article extends Component {
       }));
     }
     else {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
   }
 
@@ -87,13 +87,13 @@ class Article extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const comment = {"comment": {"body": this.state.newComment}};
+    const comment = {comment: {"body": this.state.newComment}};
     callAPI('POST', comment, `${URL}/articles/${slug}/comments`)
       .then( comment => {
         this.setState(prev => {
           return {
             comments: [...prev.comments, comment.comment],
-            newComment: ""
+            newComment: ''
           }
         });
         console.log(JSON.stringify(this.state.comments));

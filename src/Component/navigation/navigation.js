@@ -9,7 +9,7 @@ function logout() {
 
 class Navigation extends Component {
   render() {
-    if(localStorage.getItem("token")){
+    if(localStorage.getItem('token')){
       return (
         <nav>
           <ul>
