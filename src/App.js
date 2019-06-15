@@ -5,6 +5,7 @@ import Home from './Component/home/home';
 import Article from './Component/article/article';
 import Login from './Component/login/login';
 import Navigation from './Component/navigation/navigation';
+import Profile from './Component/profile/profile';
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class App extends Component {
           <Route exact path='/' component={() => <Login switchLogin={this.switchLogin} />}></Route>
           <Route path='/home' component={Home}></Route>
           <Route path='/article/:slug' component={Article}></Route>
+          <Route path='/profile' component={Profile}></Route>
         </div>
       </Router>
     )

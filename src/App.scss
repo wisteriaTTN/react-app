@@ -1,15 +1,22 @@
 $white : #ffffff;
+$light-100: #f3f3f3;
+$black: #000000;
 $danger: #dc3545;
 $green-50: #27ae60;
 $green-100: #1f984f;
 $green-200: #23522f;
 $dark-100: #333;
+$grey-100: #999;
 $blue : #007bff;
+
 .App {
     text-align: center;
     font-size: 14px;
 }
 
+.container {
+  margin: 0 5rem;
+}
 .col {
     &-1 {
         width: 8.33%;
@@ -39,6 +46,10 @@ $blue : #007bff;
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
+    span {
+      padding: 10px;
+    }
+
     :focus {
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
@@ -55,3 +66,4 @@ $blue : #007bff;
 @import '../src/Component/login/login';
 @import '../src/Component/home/home';
 @import '../src/Component/article/article';
+@import '../src/Component/profile/profile.scss';
