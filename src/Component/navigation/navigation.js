@@ -19,8 +19,14 @@ class Navigation extends Component {
                   <i className="fa fa-cog fa-lg"></i>
                 </span>
                 <div className="nav-dropdown-content">
-                  <Link to={`/profile`}>Profile</Link>
-                  <a href="#logout" onClick={logout}>Log out</a>
+                  <Link to={`/profile`}>
+                    <i className="fa fa-user"></i>
+                    <span></span>Profile
+                  </Link>
+                  <a href="#logout" onClick={logout}>
+                    <i className="fa fa-sign-out"></i>
+                    <span>Log out</span>
+                  </a>
                 </div>
               </div> 
             </li>

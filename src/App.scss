@@ -1,13 +1,21 @@
 $white : #ffffff;
-$light-100: #f3f3f3;
+$light-100: #e2e1e1;
 $black: #000000;
 $danger: #dc3545;
 $green-50: #27ae60;
 $green-100: #1f984f;
-$green-200: #23522f;
+$green-200: #00922C;
+$green-300: #007624;
+$green-400: #005419;
+$green-500: #23522f;
 $dark-100: #333;
 $grey-100: #999;
 $blue : #007bff;
+$background: #DAF3E7;
+
+body {
+  background: rgba(200, 216, 209, 0.3)
+}
 
 .App {
     text-align: center;
