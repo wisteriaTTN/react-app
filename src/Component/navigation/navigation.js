@@ -19,7 +19,7 @@ class Navigation extends Component {
                   <i className="fa fa-cog fa-lg"></i>
                 </span>
                 <div className="nav-dropdown-content">
-                  <Link to={`/profile`}>
+                  <Link to={`/profiles`}>
                     <i className="fa fa-user"></i>
                     <span></span>Profile
                   </Link>

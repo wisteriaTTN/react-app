@@ -43,12 +43,12 @@ class Profile extends Component {
 
       if (username) {
         Promise.all([
-          fetch(URL + `/${username}`, requestOptions),
+          fetch(URL + `/profiles/${username}`, requestOptions),
           fetch(URL + `/articles?author=${username}`)
         ])
           .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
           .then(([data1, data2]) => this.setState({
-            user: data1.user,
+            user: data1.profile,
             articlesList: data2
           }))
           .catch((error) => {

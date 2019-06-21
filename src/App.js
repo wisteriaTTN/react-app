@@ -38,7 +38,7 @@ class App extends Component {
           <Route exact path='/' component={() => <Login switchLogin={this.switchLogin} />}></Route>
           <Route path='/home' component={Home}></Route>
           <Route path='/article/:slug' component={Article}></Route>
-          <Route path='/profile' component={Profile}></Route>
+          <Route path='/profiles/:username' component={Profile}></Route>
         </div>
       </Router>
     )
