@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Component/home/home';
 import Article from './Component/article/article';
 import Login from './Component/login/login';
@@ -35,10 +35,14 @@ class App extends Component {
       <Router>
         <div className='App'>
           {this.state.isLogin && <Navigation></Navigation>}
-          <Route exact path='/' component={() => <Login switchLogin={this.switchLogin} />}></Route>
-          <Route path='/home' component={Home}></Route>
-          <Route path='/article/:slug' component={Article}></Route>
-          <Route path='/profiles/:username' component={Profile}></Route>
+          <Switch>
+            <Route exact path='/' component={() => <Login switchLogin={this.switchLogin} />}></Route>
+            <Route path='/home' component={Home}></Route>
+            <Route path='/article/:slug' component={Article}></Route>
+            <Route path='/profiles/:username' component={Profile}></Route>
+            <Route exact path='/profiles' component={Profile}></Route>
+            <Route component={() => <h1>Notfound</h1>} />
+          </Switch>
         </div>
       </Router>
     )
