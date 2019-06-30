@@ -96,42 +96,13 @@
     }
 }
 
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-
-  &-active {
-    display: block;
+#update-profile {
+  .form-group{
+    text-align: left;
+    font-weight: bold;
   }
 
-  #update-profile {
-    min-width: 500px;
-    background: $white;
-    border: 2px solid #007bff7a;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
-
-    h2 {
-      color: $green-300;
-    }
-    .form-input{
-      text-align: left;
-
-      label{
-        display: block;
-        font-weight: bold;
-        padding-bottom: 10px;
-      }
-
-      input {
-        box-shadow: none;
-        border: 1px solid $grey-100;
-        width: 100%;    
-      }
-    }
+  button {
+    margin-right: 1rem;
   }
 }

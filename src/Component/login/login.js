@@ -66,8 +66,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-page" onSubmit={this.handleSubmit}>
-        <form onSubmit={this.props.onSubmit} className="login-form">
+      <div className="login-page" id="login">
+        <form onSubmit={this.handleSubmit} className="login-form">
           <h2>Login</h2>
           <div className="form-input">
             <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
@@ -75,7 +75,7 @@ class Login extends Component {
           <div className="form-input">
             <input type="password" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
           </div>
-          <button type="submit"> Sign In</button>
+          <button type="submit">Sign In</button>
           <div className="error-message">{this.state.message}</div>
         </form>
       </div>

@@ -119,8 +119,8 @@ class Article extends Component {
               </div>
               <Link to={`/user`}>{localStorage.getItem("username")}</Link>
             </div>
-            <div className="col-10 comments-body" onSubmit={this.handleSubmit}>
-              <form onSubmit= { this.props.onSubmit}>
+            <div className="col-10 comments-body">
+              <form onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="What do you want to say?" value={this.state.newComment} onChange={this.handleChange}/>
               </form>
             </div>

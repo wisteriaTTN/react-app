@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../App.scss';
 import { isEmpty } from '../../Common/common-ui';
 import { URL } from '../../Common/constant';
+import { callAPI } from '../../Common/common-ui';
 
 
 function ArticlesList(list) {
@@ -21,60 +22,16 @@ function ArticlesList(list) {
   }
 }
 
-class Modal extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: props.show,
-      profile: props.profile
-    }
-    this.changeValueInput = this.changeValueInput.bind(this);
-  }
-
-  changeValueInput(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState(() => {
-      return { profile: { ...this.state.profile, [name]: value } };
-      }
-    )
-  }
-
-  render() {
-    if (!isEmpty(this.state.profile)) {
-      return (
-        <div className={`modal ${this.state.show === true ? 'modal-active': ''}`}>
-          <form id="update-profile">
-            <h2>Update User Profile</h2>
-            <div className="form-input">
-              <label>Username</label>
-              <input placeholder="Username" name="username" value={this.state.profile.username} onChange={this.changeValueInput} />
-            </div>
-            <div className="form-input">
-              <label>Email</label>
-              <input placeholder="Email" name="email" value={this.state.profile.email} onChange={this.changeValueInput} />
-            </div>
-          </form>
-        </div>
-      );
-    }
-    else {
-      return (<div></div>);
-    }
-  }
-}
-
 var username = '';
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
-      articlesList: {},
-      showModal: false
+      articlesList: {}
     }
     username = this.props.match.params.username;
+    this.changeValueInput = this.changeValueInput.bind(this);
     this.updateUser = this.updateUser.bind(this);
   }
 
@@ -120,11 +77,35 @@ class Profile extends Component {
     }
   }
 
+  changeValueInput(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState(() => {
+      return { user: { ...this.state.user, [name]: value } };
+    }
+    )
+  }
+
   updateUser(event) {
-    this.setState({
-      showModal: true
-    });
-    console.log(this.state.showModal);
+    event.preventDefault();
+
+    var body = {
+      user: {
+        email: "",
+        bio: "",
+        image: "",
+        username: "",
+        password: ""
+      }
+    }
+
+    for (let i = 0; i < 5; i++) {
+      let newValue = { [event.target[i].name]: event.target[i].value };
+      body.user = { ...body.user, ...newValue };
+    }
+
+    callAPI('PUT', body, `${URL}/user`)
+      .then();
   }
 
   render() {
@@ -150,7 +131,7 @@ class Profile extends Component {
                   <i className="fa fa-hand-o-right"></i>
                   <span>Follow</span>
                 </button>
-                <button onClick={this.updateUser}>
+                <button data-toggle="modal" data-target="#exampleModal">
                   <i className="fa fa-edit"></i>
                   <span>Edit Profile Setting</span>
                 </button>
@@ -161,7 +142,48 @@ class Profile extends Component {
               <ArticlesList articles={this.state.articlesList.articles}></ArticlesList>
             </div>
           </div>
-          <Modal show={this.state.showModal} profile={this.state.user}></Modal>
+
+          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Update User</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <form id="update-profile" onSubmit={this.updateUser}>
+                    <div className="form-group">
+                      <label className="col-form-label">Username</label>
+                      <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.user.username} onChange={this.changeValueInput} />
+                    </div>
+                    <div className="form-group">
+                      <label className="col-form-label">Email</label>
+                      <input type="text" className="form-control" placeholder="Email" name="email" value={this.state.user.email} onChange={this.changeValueInput} />
+                    </div>
+                    <div className="form-group">
+                      <label className="col-form-label">Password</label>
+                      <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.user.password} onChange={this.changeValueInput} />
+                    </div>
+                    <div className="form-group">
+                      <label className="col-form-label">Short bio about you</label>
+                      <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={this.state.user.bio} onChange={this.changeValueInput}></textarea>
+                    </div>
+                    <div className="form-group">
+                      <label className="col-form-label">Image link</label>
+                      <input type="text" className="form-control" placeholder="Image Link" name="image" value={this.state.user.image} onChange={this.changeValueInput} />
+                    </div>
+                    <div className="btn-group-right">
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="submit" className="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       );
     }

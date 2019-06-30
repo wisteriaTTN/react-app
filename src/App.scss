@@ -18,7 +18,6 @@ body {
 }
 
 .App {
-    text-align: center;
     font-size: 14px;
 }
 
@@ -54,6 +53,12 @@ body {
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
+    &-group {
+      &-right {
+        text-align: right !important;
+      }
+    }
+
     span {
       padding: 10px;
     }
@@ -68,6 +73,12 @@ body {
         border-color: $danger;
         color: $white;
     }
+
+    &-primary {
+      background: $blue;
+      border-color: $blue;
+      color: $white;
+  }
 }
 
 @import '../src/Component/navigation/navigation';
