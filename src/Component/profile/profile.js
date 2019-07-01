@@ -33,6 +33,7 @@ class Profile extends Component {
     username = this.props.match.params.username;
     this.changeValueInput = this.changeValueInput.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   componentDidMount() {
@@ -77,12 +78,25 @@ class Profile extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      user: nextProps.user
+    });
+  }
+
   changeValueInput(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState(() => {
       return { user: { ...this.state.user, [name]: value } };
     }
+    )
+  }
+
+  cancel(event) {
+    this.setState(prev => {
+      return prev.state.user
+      }
     )
   }
 
@@ -175,7 +189,7 @@ class Profile extends Component {
                       <input type="text" className="form-control" placeholder="Image Link" name="image" value={this.state.user.image} onChange={this.changeValueInput} />
                     </div>
                     <div className="btn-group-right">
-                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.cancel}>Cancel</button>
                       <button type="submit" className="btn btn-primary">Update</button>
                     </div>
                   </form>

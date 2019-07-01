@@ -9,34 +9,39 @@ function logout() {
 
 class Navigation extends Component {
   render() {
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
       return (
-        <nav>
-          <ul>
-            <li>
-              <div className="nav-dropdown">
-                <span> 
-                  <i className="fa fa-cog fa-lg"></i>
-                </span>
-                <div className="nav-dropdown-content">
-                  <Link to={`/profiles`}>
+        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+          <a className="navbar-brand" href="#brand">Blog Real World</a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to={`/home`}>Home<span className="sr-only">(current)</span></Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={`/article`}>New Article</Link>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link className="dropdown-item" to={`/profiles`}>
                     <i className="fa fa-user"></i>
-                    <span></span>Profile
+                    <span>Profile</span>
                   </Link>
-                  <a href="#logout" onClick={logout}>
+                  <a className="dropdown-item" href="#logout" onClick={logout}>
                     <i className="fa fa-sign-out"></i>
                     <span>Log out</span>
                   </a>
                 </div>
-              </div> 
-            </li>
-            <li>
-              <Link to={`/article`}>NEW ARTICLE</Link>
-            </li>
-            <li>
-            <Link to={`/home`}>HOME</Link>
-            </li>
-          </ul>
+              </li>
+            </ul>
+            <form className="form-inline my-2 my-lg-0">
+              <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
         </nav>
       );
     }

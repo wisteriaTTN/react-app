@@ -15,34 +15,12 @@
         left: 50%;
         background: $green-100;
         border-radius: 10px;
-
-        button {
-            min-width: 100px;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background: $blue;
-            color: $white;
-            box-shadow: 3px 3px 3px 0px rgb(43, 40, 34);
-        }
+        text-align: center;
 
         .error-message {
             color: #a90000;
             padding: 10px;
             font-weight: bold;
         }
-    }
-}
-
-#login.form-input {
-    margin: 1.5em;
-
-    input {
-        min-width: 300px;
-        min-height: 30px;
-        border-radius: 5px;
-        border: whitesmoke;
-        padding: 5px;
-        box-shadow: 3px 3px 3px 0px rgb(43, 40, 34);
     }
 }

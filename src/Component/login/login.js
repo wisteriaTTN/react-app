@@ -68,14 +68,14 @@ class Login extends Component {
     return (
       <div className="login-page" id="login">
         <form onSubmit={this.handleSubmit} className="login-form">
-          <h2>Login</h2>
-          <div className="form-input">
-            <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
+          <h2><b>Login</b></h2>
+          <div className="form-group">
+            <input type="text" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} />
           </div>
-          <div className="form-input">
-            <input type="password" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
+          <div className="form-group">
+            <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} />
           </div>
-          <button type="submit">Sign In</button>
+          <button className="btn btn-primary" type="submit">Sign In</button>
           <div className="error-message">{this.state.message}</div>
         </form>
       </div>
