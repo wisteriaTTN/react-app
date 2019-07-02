@@ -8,21 +8,26 @@ function ArticleList({ articles }) {
   console.log(articles);
   return articles.map((item) => (
       <div className="articles-item" key={item.slug}>
-        <Link to={`/profiles/${item.author.username}`}>
-          <div className="articles-author">
-            <div className="author-image">
-              <img alt="" src={item.author.image}></img>
+        <div className="col-md-3">
+          <Link to={`/profiles/${item.author.username}`}>
+            <div className="articles-author">
+              <div className="author-image">
+                <img alt="" src={item.author.image}></img>
+              </div>
+              <p>{item.author.username}</p>
             </div>
-            <p>{item.author.username}</p>
-          </div>
-        </Link>
-        <Link to={`/article/${item.slug}`}>
-          <div className="articles-content">
-            <div className="articles-title">{item.title}</div>
-            <div className="block-with-text">{item.body}</div>
-            <div className="articles-date">{formatDate(item.createdAt)}</div>
-          </div>
-        </Link>
+          </Link>
+        </div>
+        <div className="col-md-9">
+          <Link to={`/article/${item.slug}`}>
+            <div className="articles-content">
+              <div className="articles-title">{item.title}</div>
+              <div className="block-with-text">{item.body}</div>
+              <div className="articles-date">{formatDate(item.createdAt)}</div>
+            </div>
+          </Link>
+        </div>
+        
       </div>
   ));
 }
@@ -54,9 +59,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <h1>Article List</h1>
-        <div className="articles-list">
+        <div className="container articles-list">
           {this.state.data && this.state.data.articles &&
             <ArticleList articles={this.state.data.articles} />}
         </div>
