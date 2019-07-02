@@ -19,7 +19,7 @@ function ArticleList({ articles }) {
           </Link>
         </div>
         <div className="col-md-9">
-          <Link to={`/article/${item.slug}`}>
+          <Link id="" to={`/article/${item.slug}`}>
             <div className="articles-content">
               <div className="articles-title">{item.title}</div>
               <div className="block-with-text">{item.body}</div>

@@ -23,16 +23,27 @@ function ArticlesList(list) {
 }
 
 var username = '';
+// var body = {
+//   user: {
+//     email: "",
+//     bio: "",
+//     image: "",
+//     username: "",
+//     password: ""
+//   }
+// }
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
-      articlesList: {}
+      articlesList: {},
+      body: {}
     }
     username = this.props.match.params.username;
     this.changeValueInput = this.changeValueInput.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    //this.getDataToUpdate = this.getDataToUpdate.bind(this);
     this.cancel = this.cancel.bind(this);
   }
 
@@ -69,7 +80,8 @@ class Profile extends Component {
           .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
           .then(([data1, data2]) => this.setState({
             user: data1.user,
-            articlesList: data2
+            body: data1,
+            articlesList: data2,
           }));
       }
     }
@@ -78,48 +90,32 @@ class Profile extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      user: nextProps.user
-    });
-  }
-
   changeValueInput(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState(() => {
-      return { user: { ...this.state.user, [name]: value } };
+      return { body: {user : { ...this.state.user, [name]: value } }};
     }
     )
   }
 
   cancel(event) {
-    this.setState(prev => {
-      return prev.state.user
-      }
+    this.setState({
+      body: {user: {...this.state.user}}
+    }
     )
   }
 
   updateUser(event) {
     event.preventDefault();
 
-    var body = {
-      user: {
-        email: "",
-        bio: "",
-        image: "",
-        username: "",
-        password: ""
-      }
-    }
-
-    for (let i = 0; i < 5; i++) {
-      let newValue = { [event.target[i].name]: event.target[i].value };
-      body.user = { ...body.user, ...newValue };
-    }
-
-    callAPI('PUT', body, `${URL}/user`)
-      .then();
+    callAPI('PUT', this.state.body, `${URL}/user`)
+      .then(data => {
+        this.setState({
+          user: data.user
+        });
+        this.cancel();
+      });
   }
 
   render() {
@@ -145,7 +141,7 @@ class Profile extends Component {
                   <i className="fa fa-hand-o-right"></i>
                   <span>Follow</span>
                 </button>
-                <button data-toggle="modal" data-target="#exampleModal">
+                <button data-toggle="modal" data-target="#openUpdateProfile" onClick={this.getDataToUpdate}>
                   <i className="fa fa-edit"></i>
                   <span>Edit Profile Setting</span>
                 </button>
@@ -157,7 +153,7 @@ class Profile extends Component {
             </div>
           </div>
 
-          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal fade" id="openUpdateProfile" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
@@ -170,23 +166,23 @@ class Profile extends Component {
                   <form id="update-profile" onSubmit={this.updateUser}>
                     <div className="form-group">
                       <label className="col-form-label">Username</label>
-                      <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.user.username} onChange={this.changeValueInput} />
+                      <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.body.user.username} onChange={this.changeValueInput} />
                     </div>
                     <div className="form-group">
                       <label className="col-form-label">Email</label>
-                      <input type="text" className="form-control" placeholder="Email" name="email" value={this.state.user.email} onChange={this.changeValueInput} />
+                      <input type="text" className="form-control" placeholder="Email" name="email" value={this.state.body.user.email} onChange={this.changeValueInput} />
                     </div>
                     <div className="form-group">
                       <label className="col-form-label">Password</label>
-                      <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.user.password} onChange={this.changeValueInput} />
+                      <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.body.user.password} onChange={this.changeValueInput} />
                     </div>
                     <div className="form-group">
                       <label className="col-form-label">Short bio about you</label>
-                      <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={this.state.user.bio} onChange={this.changeValueInput}></textarea>
+                      <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={this.state.body.user.bio} onChange={this.changeValueInput}></textarea>
                     </div>
                     <div className="form-group">
                       <label className="col-form-label">Image link</label>
-                      <input type="text" className="form-control" placeholder="Image Link" name="image" value={this.state.user.image} onChange={this.changeValueInput} />
+                      <input type="text" className="form-control" placeholder="Image Link" name="image" value={this.state.body.user.image} onChange={this.changeValueInput} />
                     </div>
                     <div className="btn-group-right">
                       <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.cancel}>Cancel</button>
