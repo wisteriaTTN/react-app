@@ -7,20 +7,13 @@ h1 {
 .main {
     margin-top: 10%;
 }
+
 .articles {
     &-item {
         width: inherit;
         display: flex;
         padding: 1em 0;
         border-bottom: 1px solid $green-300;
-
-        a:nth-child(2) {
-            //text-decoration: none;
-            color: #000000;
-            &:hover {
-              text-decoration: none;
-            }
-        }
     }
 
     &-author {
@@ -38,10 +31,6 @@ h1 {
         }
     }
 
-    &-content {
-        text-align: left;
-    }
-
     &-title {
         font-size: 20px;
         font-weight: bold;
@@ -49,10 +38,18 @@ h1 {
     }
 
     &-date {
-      color: #9199a1;
-      font-style: italic;
-      font-weight: bold;
-  }
+        color: #9199a1;
+        font-style: italic;
+        font-weight: bold;
+        position: absolute;
+        bottom: 20px
+    }
+}
+
+#articles-content {
+    text-align: left;
+    text-decoration: none;
+    position: relative;
 }
 
 .block-with-text {
@@ -81,5 +78,5 @@ h1 {
     width: 1em;
     height: 1em;
     margin-top: 0.2em;
-    background: $background;
+    background: #eef3f1;
 }

@@ -23,15 +23,7 @@ function ArticlesList(list) {
 }
 
 var username = '';
-// var body = {
-//   user: {
-//     email: "",
-//     bio: "",
-//     image: "",
-//     username: "",
-//     password: ""
-//   }
-// }
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -114,7 +106,6 @@ class Profile extends Component {
         this.setState({
           user: data.user
         });
-        this.cancel();
       });
   }
 

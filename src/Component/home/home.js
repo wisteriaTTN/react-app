@@ -7,28 +7,24 @@ import { formatDate } from '../../Common/common-ui'
 function ArticleList({ articles }) {
   console.log(articles);
   return articles.map((item) => (
-      <div className="articles-item" key={item.slug}>
-        <div className="col-md-3">
-          <Link to={`/profiles/${item.author.username}`}>
-            <div className="articles-author">
-              <div className="author-image">
-                <img alt="" src={item.author.image}></img>
-              </div>
-              <p>{item.author.username}</p>
+    <div className="articles-item" key={item.slug}>
+      <div className="col-md-3">
+        <Link to={`/profiles/${item.author.username}`}>
+          <div className="articles-author">
+            <div className="author-image">
+              <img alt="" src={item.author.image}></img>
             </div>
-          </Link>
-        </div>
-        <div className="col-md-9">
-          <Link id="" to={`/article/${item.slug}`}>
-            <div className="articles-content">
-              <div className="articles-title">{item.title}</div>
-              <div className="block-with-text">{item.body}</div>
-              <div className="articles-date">{formatDate(item.createdAt)}</div>
-            </div>
-          </Link>
-        </div>
-        
+            <p>{item.author.username}</p>
+          </div>
+        </Link>
       </div>
+      <Link id="articles-content" to={`/article/${item.slug}`} className="col-md-9">
+        <div className="articles-title">{item.title}</div>
+        <div className="block-with-text">{item.body}</div>
+        <div className="articles-date">{formatDate(item.createdAt)}</div>
+      </Link>
+
+    </div>
   ));
 }
 
@@ -42,15 +38,15 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       fetch(URL + '/articles')
-      .then(res => res.json())
-      .then(json => {
-        var articles = json.articles.filter(article => article.author.image.includes('http'));
-        json.articles = articles;
-        return json;
-      })
-      .then(data => this.setState({ data }));
+        .then(res => res.json())
+        .then(json => {
+          var articles = json.articles.filter(article => article.author.image.includes('http'));
+          json.articles = articles;
+          return json;
+        })
+        .then(data => this.setState({ data }));
     }
     else {
       this.props.history.push("/");

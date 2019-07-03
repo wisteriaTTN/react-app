@@ -14,7 +14,11 @@ class Navigation extends Component {
         <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <a className="navbar-brand" href="#brand">Blog Real World</a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
+            <form className="form-inline my-2 my-lg-0">
+              <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <Link className="nav-link" to={`/home`}>Home<span className="sr-only">(current)</span></Link>
               </li>
@@ -37,10 +41,6 @@ class Navigation extends Component {
                 </div>
               </li>
             </ul>
-            <form className="form-inline my-2 my-lg-0">
-              <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
           </div>
         </nav>
       );
