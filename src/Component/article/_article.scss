@@ -3,29 +3,28 @@
 }
 
 .article {
-    text-align: left;
 
     &-block {
         margin: 0 auto;
-        width: 1000px;
-        background: $green-100;
+        background: $white;
         border-radius: 10px;
+        border: 1px solid $green-100;
         padding: 15px;
-        margin-top: 4%;
+        margin-top: 10%;
     }
 
     &-title {
-        color: $white;
+        color: $green-200;
     }
 
     &-description {
-        color: #d8d8d8;
+        color: $grey-100;
         font-style: italic;
         line-height: 2;
     }
 
     &-body {
-        color: #332a2a;
+        color: $brown;
         font-size: 1.3em;
         font-weight: bold;
     }
@@ -33,18 +32,15 @@
 
 .comments {
     &-block {
-        margin: 0 auto;
-        width: 1000px;
-        margin-bottom: 4%;
-    }
+        margin: 5% 0;
+     }
 
     &-item {
         border-bottom: 1px solid $green-100;
         padding: 10px;
         background: #eafff0;
         border-radius: 5px;
-        margin-top: 1em;
-        display: flex;
+        margin: 1rem;
     }
 
     &-image {
@@ -59,21 +55,12 @@
       }
     }
 
-    &-body {
-      input {
-        width: 95%;
-        height: 36px;
-        border: 1px solid $green-200;
-        border-radius: 6px;
-        padding: 5px; 
-      }
-    }
-
     &-title {
-        color: $green-200;
+        color: $green-400;
+        font-weight: 800;
     }
 
     &-date {
-        color: #8e3d04;
+        color: $grey-100;
     }
 }

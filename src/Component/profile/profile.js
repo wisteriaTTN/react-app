@@ -106,6 +106,7 @@ class Profile extends Component {
         this.setState({
           user: data.user
         });
+        localStorage.setItem("username", data.user.username);
       });
   }
 
