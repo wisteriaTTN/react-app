@@ -4,6 +4,8 @@ import { isEmpty } from '../../Common/common-ui';
 import { URL } from '../../Common/constant';
 import { callAPI } from '../../Common/common-ui';
 
+var $ = window.jQuery;
+
 
 function ArticlesList(list) {
 
@@ -22,6 +24,56 @@ function ArticlesList(list) {
   }
 }
 
+function ModalUpdateUser({user, changeValueInput, updateUser, cancel}) {
+  if (!isEmpty(user)) {
+    return (
+      <div className="modal fade" id="openUpdateProfile" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Update User</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form id="update-profile">
+                <div className="form-group">
+                  <label className="col-form-label">Username</label>
+                  <input type="text" className="form-control" placeholder="Username" name="username" value={user.username} onChange={() => changeValueInput()} />
+                </div>
+                <div className="form-group">
+                  <label className="col-form-label">Email</label>
+                  <input type="text" className="form-control" placeholder="Email" name="email" value={user.email} onChange={() => changeValueInput()} />
+                </div>
+                <div className="form-group">
+                  <label className="col-form-label">Password</label>
+                  <input type="password" className="form-control" placeholder="Password" name="password" value={user.password} onChange={() => changeValueInput()} />
+                </div>
+                <div className="form-group">
+                  <label className="col-form-label">Short bio about you</label>
+                  <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={user.bio} onChange={() => changeValueInput()}></textarea>
+                </div>
+                <div className="form-group">
+                  <label className="col-form-label">Image link</label>
+                  <input type="text" className="form-control" placeholder="Image Link" name="image" value={user.image} onChange={() => changeValueInput()} />
+                </div>
+                <div className="btn-group-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => cancel()}>Cancel</button>
+                  <button type="button" className="btn btn-primary" onClick={() => updateUser()}>Update</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  else {
+    return <div></div>;
+  }
+}
+
 var username = '';
 
 class Profile extends Component {
@@ -35,7 +87,6 @@ class Profile extends Component {
     username = this.props.match.params.username;
     this.changeValueInput = this.changeValueInput.bind(this);
     this.updateUser = this.updateUser.bind(this);
-    //this.getDataToUpdate = this.getDataToUpdate.bind(this);
     this.cancel = this.cancel.bind(this);
   }
 
@@ -59,6 +110,7 @@ class Profile extends Component {
           .then(([data1, data2]) => this.setState({
             user: data1.profile,
             articlesList: data2
+
           }))
           .catch((error) => {
             console.log(error.message);
@@ -86,16 +138,15 @@ class Profile extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState(() => {
-      return { body: {user : { ...this.state.user, [name]: value } }};
+      return { body: { user: { ...this.state.user, [name]: value } } };
     }
     )
   }
 
-  cancel(event) {
+  cancel() {
     this.setState({
-      body: {user: {...this.state.user}}
-    }
-    )
+      body: { user: { ...this.state.user } }
+    })
   }
 
   updateUser(event) {
@@ -106,6 +157,7 @@ class Profile extends Component {
         this.setState({
           user: data.user
         });
+        $('#openUpdateProfile').modal('hide');
         localStorage.setItem("username", data.user.username);
       });
   }
@@ -145,46 +197,7 @@ class Profile extends Component {
             </div>
           </div>
 
-          <div className="modal fade" id="openUpdateProfile" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">Update User</h5>
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <form id="update-profile" onSubmit={this.updateUser}>
-                    <div className="form-group">
-                      <label className="col-form-label">Username</label>
-                      <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.body.user.username} onChange={this.changeValueInput} />
-                    </div>
-                    <div className="form-group">
-                      <label className="col-form-label">Email</label>
-                      <input type="text" className="form-control" placeholder="Email" name="email" value={this.state.body.user.email} onChange={this.changeValueInput} />
-                    </div>
-                    <div className="form-group">
-                      <label className="col-form-label">Password</label>
-                      <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.body.user.password} onChange={this.changeValueInput} />
-                    </div>
-                    <div className="form-group">
-                      <label className="col-form-label">Short bio about you</label>
-                      <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={this.state.body.user.bio} onChange={this.changeValueInput}></textarea>
-                    </div>
-                    <div className="form-group">
-                      <label className="col-form-label">Image link</label>
-                      <input type="text" className="form-control" placeholder="Image Link" name="image" value={this.state.body.user.image} onChange={this.changeValueInput} />
-                    </div>
-                    <div className="btn-group-right">
-                      <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.cancel}>Cancel</button>
-                      <button type="submit" className="btn btn-primary">Update</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+          {this.state.body && <ModalUpdateUser user={this.state.body.user} changeValueInput={this.changeValueInput} updateUser={this.updateUser} cancel={this.cancel}/>}
 
         </div>
       );

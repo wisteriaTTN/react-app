@@ -55,7 +55,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="main">
+      <div>
         <h1>Article List</h1>
         <div className="container articles-list">
           {this.state.data && this.state.data.articles &&

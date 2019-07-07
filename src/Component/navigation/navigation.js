@@ -11,7 +11,7 @@ class Navigation extends Component {
   render() {
     if (localStorage.getItem('token')) {
       return (
-        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
           <a className="navbar-brand" href="#brand">Blog Real World</a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <form className="form-inline my-2 my-lg-0">

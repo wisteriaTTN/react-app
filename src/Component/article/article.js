@@ -103,13 +103,13 @@ class Article extends Component {
 
   render() {
     return (
-      <div className="container article">
+      <div className="container article my-5">
         <div className="article-block">
           <h2 className="article-title">{this.state.article.title}</h2>
           <div className="article-description">{this.state.article.description}</div>
           <div className="article-body">{this.state.article.body}</div>
         </div>
-        <div className="comments-block">
+        <div className="comments-block mt-5">
           <h5 className="comments-title">COMMENTS</h5>
           <CommentList comments={this.state.comments} deleteComment={this.deleteComment} />
           <div className="row comments-item">
