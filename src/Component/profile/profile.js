@@ -40,27 +40,27 @@ function ModalUpdateUser({user, changeValueInput, updateUser, cancel}) {
               <form id="update-profile">
                 <div className="form-group">
                   <label className="col-form-label">Username</label>
-                  <input type="text" className="form-control" placeholder="Username" name="username" value={user.username} onChange={() => changeValueInput()} />
+                  <input type="text" className="form-control" placeholder="Username" name="username" value={user.username} onChange={(event) => changeValueInput(event)} />
                 </div>
                 <div className="form-group">
                   <label className="col-form-label">Email</label>
-                  <input type="text" className="form-control" placeholder="Email" name="email" value={user.email} onChange={() => changeValueInput()} />
+                  <input type="text" className="form-control" placeholder="Email" name="email" value={user.email} onChange={(event) => changeValueInput(event)} />
                 </div>
                 <div className="form-group">
                   <label className="col-form-label">Password</label>
-                  <input type="password" className="form-control" placeholder="Password" name="password" value={user.password} onChange={() => changeValueInput()} />
+                  <input type="password" className="form-control" placeholder="Password" name="password" value={user.password} onChange={(event) => changeValueInput(event)} />
                 </div>
                 <div className="form-group">
                   <label className="col-form-label">Short bio about you</label>
-                  <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={user.bio} onChange={() => changeValueInput()}></textarea>
+                  <textarea className="form-control" placeholder="Tell something yourself" name="bio" value={user.bio} onChange={(event) => changeValueInput(event)}></textarea>
                 </div>
                 <div className="form-group">
                   <label className="col-form-label">Image link</label>
-                  <input type="text" className="form-control" placeholder="Image Link" name="image" value={user.image} onChange={() => changeValueInput()} />
+                  <input type="text" className="form-control" placeholder="Image Link" name="image" value={user.image} onChange={(event) => changeValueInput(event)} />
                 </div>
                 <div className="btn-group-right">
                   <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => cancel()}>Cancel</button>
-                  <button type="button" className="btn btn-primary" onClick={() => updateUser()}>Update</button>
+                  <button type="button" className="btn btn-primary" onClick={(event) => updateUser(event)}>Update</button>
                 </div>
               </form>
             </div>
@@ -106,11 +106,10 @@ class Profile extends Component {
           fetch(URL + `/profiles/${username}`, requestOptions),
           fetch(URL + `/articles?author=${username}`)
         ])
-          .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-          .then(([data1, data2]) => this.setState({
+          .then(([res1, res2, res3]) => Promise.all([res1.json(), res2.json()]))
+          .then(([data1, data2, data3]) => this.setState({
             user: data1.profile,
             articlesList: data2
-
           }))
           .catch((error) => {
             console.log(error.message);
@@ -138,7 +137,7 @@ class Profile extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState(() => {
-      return { body: { user: { ...this.state.user, [name]: value } } };
+      return { body: { user: { ...this.state.body.user, [name]: value } } };
     }
     )
   }
