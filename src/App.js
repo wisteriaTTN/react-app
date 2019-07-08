@@ -6,6 +6,7 @@ import Article from './Component/article/article';
 import Login from './Component/login/login';
 import Navigation from './Component/navigation/navigation';
 import Profile from './Component/profile/profile';
+import NewArticle from './Component/new-article/newArticle';
 
 class App extends Component {
   constructor(props) {
@@ -38,9 +39,10 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={() => <Login switchLogin={this.switchLogin} />}></Route>
             <Route path='/home' component={Home}></Route>
+            <Route exact path='/article/createNew' component={NewArticle}></Route>
             <Route path='/article/:slug' component={Article}></Route>
             <Route path='/profiles/:username' component={Profile}></Route>
-            <Route exact path='/profiles' component={Profile}></Route>
+            <Route exact path='/profiles/user' component={Profile}></Route>
             <Route component={() => <h1>Notfound</h1>} />
           </Switch>
         </div>

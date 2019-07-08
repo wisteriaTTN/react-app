@@ -19,7 +19,9 @@ function CommentList({ comments, deleteComment }) {
           <div className="comments-date">{formatDate(item.createdAt)}</div>
         </div>
         <div className="col-md-1">
-          {item.author.username === localStorage.getItem('username') && <button type="button" className="btn btn-danger" onClick={() => deleteComment(item.id)}>Delete</button>}
+          {item.author.username === localStorage.getItem('username') && <button type="button" className="close" aria-label="Close" onClick={() => deleteComment(item.id)}>
+            <span aria-hidden="true">&times;</span>
+          </button>}
         </div>
       </div>
     ));

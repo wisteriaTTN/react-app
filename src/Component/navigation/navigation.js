@@ -23,14 +23,14 @@ class Navigation extends Component {
                 <Link className="nav-link" to={`/home`}>Home<span className="sr-only">(current)</span></Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={`/article`}>New Article</Link>
+                <Link className="nav-link" to={`/article/createNew`}>New Article</Link>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Dropdown
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <Link className="dropdown-item" to={`/profiles`}>
+                  <Link className="dropdown-item" to={`/profiles/user`}>
                     <i className="fa fa-user"></i>
                     <span>Profile</span>
                   </Link>
